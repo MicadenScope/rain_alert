@@ -1,0 +1,37 @@
+name: Rain Alert
+
+on:
+  schedule:
+    # Täglich um 07:00 Uhr Schweizer Sommerzeit (05:00 UTC)
+    - cron: "0 5 * * *"
+
+  # Ermöglicht das manuelle Starten über GitHub
+  workflow_dispatch:
+
+jobs:
+  rain-alert:
+    runs-on: ubuntu-latest
+
+    env:
+      OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
+      TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+      TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+      MY_TWILIO_PHONE_NUMBER: ${{ secrets.MY_TWILIO_PHONE_NUMBER }}
+      RECEIVER_PHONE_NUMBER: ${{ secrets.RECEIVER_PHONE_NUMBER }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests twilio
+
+      - name: Run Rain Alert
+        run: python main.py
