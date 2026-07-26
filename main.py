@@ -13,7 +13,7 @@ today = datetime.now()
 today_tuple = (today.month, today.day)
 
 def send_notification():
-    client = Client(account_sid, auth_token)
+    client = Client(ACCOUNT_SID, AUTH_TOKEN)
     message = client.messages.create(
         body="It's going to rain 🌧️ today. Remember to bring an ☔️.",
         from_=SENDER_PHONE,
