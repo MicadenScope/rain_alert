@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
-      TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-      TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-      MY_TWILIO_PHONE_NUMBER: ${{ secrets.MY_TWILIO_PHONE_NUMBER }}
-      RECEIVER_PHONE_NUMBER: ${{ secrets.RECEIVER_PHONE_NUMBER }}
+      ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+      AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+      WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+      SENDER_PHONE: ${{ secrets.SENDER_PHONE }}
+      RECIPIENT_PHONE: ${{ secrets.RECIPIENT_PHONE }}
 
     steps:
       - name: Checkout repository
