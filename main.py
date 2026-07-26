@@ -1,28 +1,31 @@
 import os
+from datetime import datetime
 from twilio.rest import Client
 from requests import *
 
-account_sid = os.environ["TWILIO_ACCOUNT_SID"]
-auth_token = os.environ["TWILIO_AUTH_TOKEN"]
-API_KEY = os.environ["TWILIO_AUTH_TOKEN"]
-sender_phone_number = os.environ["MY_TWILIO_PHONE_NUMBER"]
-receiver_phone_number = os.environ["RECEIVER_PHONE_NUMBER"]
+ACCOUNT_SID = os.environ["ACCOUNT_SID"] #TWILIO_ACCOUNT_SID
+AUTH_TOKEN = os.environ["AUTH_TOKEN"] #TWILIO_AUTH_TOKEN
+WEATHER_API_KEY = os.environ["WEATHER_API_KEY"] #openweathermap.org/api_keys
+SENDER_PHONE = os.environ["SENDER_PHONE"]
+RECIPIENT_PHONE = os.environ["RECIPIENT_PHONE"]
+
+today = datetime.now()
+today_tuple = (today.month, today.day)
 
 def send_notification():
     client = Client(account_sid, auth_token)
     message = client.messages.create(
         body="It's going to rain 🌧️ today. Remember to bring an ☔️.",
-        from_=sender_phone_number,
-        to=receiver_phone_number,
+        from_=SENDER_PHONE,
+        to=RECIPIENT_PHONE,
     )
 
-    print(message.body)
-
+    #print(message.body)
 
 weather_params = {
     "lat": 43.293674,
     "lon": 13.450901,
-    "appid": API_KEY,
+    "appid": WEATHER_API_KEY,
     "cnt": 4,
 }
 
